@@ -1,0 +1,1 @@
+docker-compose exec php-fpm composer create-project --ignore-platform-reqs --repository=https://repo.magento.com/ magento/project-community-edition /magento

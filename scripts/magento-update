@@ -1,0 +1,1 @@
+docker-compose exec php-fpm composer install --ignore-platform-reqs -d /brs

@@ -1,0 +1,31 @@
+# https://docs.docker.com/compose/compose-file
+version: "3.7"
+services:
+  app:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./magento:/magento
+      - ./services/app/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    build:
+      context: ./services/php-fpm
+    ports:
+      - "9000"
+    volumes:
+      - ./magento:/magento
+
+  db:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=magento
+      - MYSQL_USER=magento
+      - MYSQL_PASSWORD=password1
+      - MYSQL_ROOT_PASSWORD=password1
